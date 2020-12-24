@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GameCard from './components/gamecard';
+import Search from './components/search';
 import CardContainer from './containers/cardcontainer';
 import { connect } from 'react-redux';
 //import * as actions from '../src/actions/actions';
@@ -12,7 +12,12 @@ import {
 
 function App(props) {
   return (
-    <CardContainer/>
+    <>
+      <h1 className={'gstor'}>GStor</h1>
+      <h2 className={'gstor-subtitle'}>Find information on your favorite video games</h2>
+      <Search/>
+      <CardContainer/>
+    </>
   );
 }
 

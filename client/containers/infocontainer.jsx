@@ -18,21 +18,13 @@ const style = {
 }
 
 
-const CardContainer = (props) => {
+const Infocontainer = (props) => {
   return (
-    <div className={'card-container'}>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
+    <div className={'info-container'}>
+      <h1>World of Warcraft</h1>
+      <h2></h2>  
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Infocontainer);

@@ -1,4 +1,45 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  height: 100%;
+  background-color: blue;
+  justify-self: center;
+  margin: 0 auto 0 auto;
+}
+
+#search {
+  width: 500px;
+  height: 35px;
+  border-radius: 25px;
+  padding-left: 10px;
+}
+
+#search:focus {
+  outline: none;
+  outline-width: 0;
+}
+
+.search-wrapper {
+  display: flex;
+  margin: auto;  
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.gstor {
+  font-size: 6rem;
+  text-align: center;
+}
+
+.gstor-subtitle {
+  font-size: 2rem;
+  text-align: center;
 }

@@ -21,7 +21,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'rgb(39 34 34)',
-    color: 'white'
+    color: 'white',
+    margin: '5px'
   },
   titles: {
     justifySelf: 'center',
