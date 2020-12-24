@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Search from './components/search';
 import CardContainer from './containers/cardcontainer';
+import Infocontainer from './containers/infocontainer';
 import { connect } from 'react-redux';
 //import * as actions from '../src/actions/actions';
 import {
@@ -17,6 +18,7 @@ function App(props) {
       <h2 className={'gstor-subtitle'}>Find information on your favorite video games</h2>
       <Search/>
       <CardContainer/>
+      <Infocontainer/>
     </>
   );
 }
