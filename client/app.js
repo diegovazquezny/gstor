@@ -12,6 +12,11 @@ import {
 } from 'react-router-dom';
 
 function App(props) {
+  fetch('/api/data')
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  
   return (
     <>
       <h1 className={'gstor'}>GStor</h1>

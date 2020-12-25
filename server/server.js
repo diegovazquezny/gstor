@@ -1,19 +1,19 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const cookieParser = require('cookie-parser');
 const cors = require('cors')
 require('dotenv').config();
+const dataRouter = require('./routers/dataRouter');
 
 app.enable('trust proxy', 1);
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static(path.join(__dirname, "../client/images/images")));
 
+app.use("/api", dataRouter);
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, '../dist', 'index.html')));
-app.use('*', (req, res) => res.redirect('/'));
 
 // Global Error Handler
 app.use(function (err, req, res, next) {
