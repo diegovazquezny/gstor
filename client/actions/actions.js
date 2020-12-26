@@ -20,3 +20,12 @@ export const totalPages = (totalGames) => ({
   type: types.TOTAL_PAGES,
   payload: totalGames
 });
+
+export const getData = () => ({
+  type: types.GET_DATA,
+});
+
+export const updateGameInfo = (info) => ({
+  type: types.UPDATE_GAME_INFO,
+  payload: info
+});

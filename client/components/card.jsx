@@ -22,7 +22,8 @@ const styles = {
     flexDirection: 'column',
     backgroundColor: 'rgb(39 34 34)',
     color: 'white',
-    margin: '5px'
+    margin: '5px',
+    cursor: 'pointer'
   },
   titles: {
     display: 'table-cell',
@@ -44,9 +45,9 @@ const styles = {
   },
 }
 
-const Card = ({name, picUrl, addons, voice}) => {
+const Card = ({name, picUrl, addons, voice, selectGame}) => {
   return (
-    <div style={styles.root}>
+    <div style={styles.root} onClick={selectGame(name)}>
       <div style={{display:'table'}}>
         <p style={styles.titles}>{name}</p>
       </div>

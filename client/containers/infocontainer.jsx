@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import img from '../images/images/65.png';
 //import * as actions from '../../actions/actions';
@@ -8,22 +8,37 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = ({
-  reducer: { userName, picture, authenticated }
-}) => ({ userName, picture, authenticated });
+  reducer: { gameInfo }
+}) => ({ gameInfo });
 
-const style = {
-  root: {
-    
+
+const Infocontainer = ({gameData, gameInfo}) => {
+  console.log('inside info container', gameInfo.Name);
+  //const [draw, setDraw] = useState(true);
+  
+  const fileNames = () => {
+    if (!gameData.GameFiles) return;
+    return gameData.GameFiles.map((file, i) => {
+      return (
+        <li key={`li${i}`}>
+          {file.FileName}
+        </li>
+      )
+    })
   }
-}
 
+  useEffect(() => {
+    //setDraw(!draw);
+    console.log('new game');
+  },[gameInfo.Name])
 
-const Infocontainer = (props) => {
   return (
-    <div className={'info-container'}>
+    <div className={'info-container'} id={'info'}>
       <div className={'info-title-wrapper'}>
-        <h1 className={'info-title'}>Starcraft 2</h1>
-        <img className={'info-img'} src={img}></img>
+        <h1 className={'info-title'}>{gameInfo.Name}</h1>
+        <div className={'info-img-wrapper'}>
+          <img className={'info-img'} src={'/' + gameData.ID + '.png'}></img>
+        </div>
       </div>
       <div className={'info-table'}>
         <table>
@@ -33,7 +48,7 @@ const Infocontainer = (props) => {
                 Slug
               </th>
               <td>
-                starcraft-2
+              {gameData.Slug}
               </td>
             </tr>
             <tr>
@@ -41,18 +56,9 @@ const Infocontainer = (props) => {
                 File names
               </th>
               <td>
-                <p>
-                  file 1
-                </p>
-                <p>
-                  file 2
-                </p>
-                <p>
-                  file 3
-                </p>
-                <p>
-                  file 4
-                </p> 
+                <ul>
+                  {fileNames()}
+                </ul>
               </td>
             </tr>
             <tr>
@@ -78,7 +84,6 @@ const Infocontainer = (props) => {
                         InstallPath
                       </td>
                     </tr>
-                    <p></p>
                     <tr>
                       <th>
                         Hint path
@@ -186,7 +191,7 @@ const Infocontainer = (props) => {
                         Max free storage
                       </th>
                       <td>
-                        0
+                        {gameData.MaxFreeStorage}
                       </td>
                     </tr>
                     <tr>
@@ -194,7 +199,7 @@ const Infocontainer = (props) => {
                         Max premium storage
                       </th>
                       <td>
-                        0
+                        {gameData.MaxPremiumStorage}
                       </td>
                     </tr>
                     <tr>
@@ -202,7 +207,7 @@ const Infocontainer = (props) => {
                         Max file size
                       </th>
                       <td>
-                        0
+                        {gameData.MaxFileSize}
                       </td>
                     </tr>
                     <tr>
@@ -210,7 +215,11 @@ const Infocontainer = (props) => {
                         Addon settings folder filter
                       </th>
                       <td>
-                        0
+                       {
+                          gameData.AddOnSettingsFolderFilter 
+                            ? gameData.AddOnSettingsFolderFilter
+                            : 'N/A'
+                        }
                       </td>
                     </tr>
                     <tr>
@@ -218,7 +227,11 @@ const Infocontainer = (props) => {
                         Addon settings starting folder
                       </th>
                       <td>
-                        WTF/Account
+                        {
+                          gameData.AddOnSettingsStartingFolder 
+                            ? gameData.AddOnSettingsStartingFolder
+                            : 'N/A'
+                        }
                       </td>
                     </tr>
                     <tr>
@@ -226,7 +239,11 @@ const Infocontainer = (props) => {
                         Addon settings file filter
                       </th>
                       <td>
-                        .lua;AddOns.txt
+                        {
+                          gameData.AddOnSettingsFileFilter 
+                            ? gameData.AddOnSettingsFileFilter
+                            : 'N/A'
+                        }
                       </td>
                     </tr>
                     <tr>
@@ -234,7 +251,12 @@ const Infocontainer = (props) => {
                         Addon settings file removal filter
                       </th>
                       <td>
-                        *
+                        {
+                          gameData.AddOnSettingsFileRemovalFilter 
+                            ? gameData.AddOnSettingsFileRemovalFilter
+                            : 'N/A'
+                        }
+
                       </td>
                     </tr>
                     <tr>
@@ -242,7 +264,7 @@ const Infocontainer = (props) => {
                         Supports addons
                       </th>
                       <td>
-                        true
+                        {gameData.SupportsAddons ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -250,7 +272,7 @@ const Infocontainer = (props) => {
                         Supports voice
                       </th>
                       <td>
-                        true
+                        {gameData.SupportsVoice ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -258,7 +280,7 @@ const Infocontainer = (props) => {
                         Order
                       </th>
                       <td>
-                        12
+                        {gameData.Order}
                       </td>
                     </tr>
                     <tr>
@@ -266,7 +288,7 @@ const Infocontainer = (props) => {
                         Supports notifcations
                       </th>
                       <td>
-                        true
+                        {gameData.SupportsNotifications ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -274,7 +296,7 @@ const Infocontainer = (props) => {
                         Bundle assets
                       </th>
                       <td>
-                        true
+                        {gameData.BundleAssets ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -282,7 +304,7 @@ const Infocontainer = (props) => {
                         Profiler addon id
                       </th>
                       <td>
-                        43270
+                        {gameData.ProfilerAddOnId}
                       </td>
                     </tr>
                     <tr>
@@ -290,7 +312,7 @@ const Infocontainer = (props) => {
                         Twitch game id
                       </th>
                       <td>
-                        18120
+                        {gameData.TwitchGameId}
                       </td>
                     </tr>
                   </tbody>

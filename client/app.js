@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from './components/search';
 import CardContainer from './containers/cardcontainer';
 import Infocontainer from './containers/infocontainer';
@@ -12,18 +12,21 @@ import {
   Redirect
 } from 'react-router-dom';
 
-function App(props) {
-  
+// const mapStateToProps = ({
+//   reducer: { page, total }
+// }) => ({ page, total });
+
+
+function App({ loaded }) {
   return (
     <>
       <h1 className={'gstor'}>GStor</h1>
       <h2 className={'gstor-subtitle'}>Find information on your favorite video games</h2>
       <Search/>
-      {/* <CardContainer/> */}
-      <Loading/>
+      <CardContainer/>
       {/* <Infocontainer/> */}
     </>
   );
 }
 
-export default App;
+export default connect(null, null)(App);

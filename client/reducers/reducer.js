@@ -3,12 +3,16 @@ export const types = {
   PREV_PAGE: 'PREV_PAGE',
   NEXT_PAGE: 'NEXT_PAGE',
   LAST_PAGE: 'LAST_PAGE',
-  TOTAL_PAGES: 'TOTAL_PAGES'
+  TOTAL_PAGES: 'TOTAL_PAGES',
+  GET_DATA: 'GET_DATA',
+  UPDATE_GAME_INFO: 'UPDATE_GAME_INFO'
 }
 
 const initialState = {
   page: 1,
-  total: 0 
+  total: 0,
+  loaded: false,
+  gameInfo: {} 
 }
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +45,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         total: Math.ceil(total / 18)
       };
+    case types.GET_DATA:
+      return {
+        ...state,
+        loaded: true 
+      }
+    case types.UPDATE_GAME_INFO:
+      console.log('game info', action.payload);
+      return {
+        ...state,
+        gameInfo: action.payload 
+      }
     default:
       return state;
   }
