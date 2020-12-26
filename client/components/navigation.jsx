@@ -13,6 +13,8 @@ const mapStateToProps = ({
   reducer: { page, total }
 }) => ({ page, total });
 
+// TODO: total is hardcoded. needs to come from reducer
+
 const Navigation = ({firstPage, prevPage, nextPage, lastPage, page}) => {
   return (
     <div className={'nav-container'}>

@@ -26,8 +26,8 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
     fetch('/api/game?name=' + name)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        updateGameInfo(data);
+        //console.log('select game =>', data.gameData);
+        updateGameInfo(data.gameData);
         setShowGameInfo(true);
         return data;
       })

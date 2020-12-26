@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
         loaded: true 
       }
     case types.UPDATE_GAME_INFO:
-      console.log('game info', action.payload);
+      //console.log('game info', action.payload);
       return {
         ...state,
         gameInfo: action.payload 

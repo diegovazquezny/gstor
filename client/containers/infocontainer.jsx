@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import img from '../images/images/65.png';
-//import * as actions from '../../actions/actions';
 
 const mapDispatchToProps = dispatch => ({
  // updateUserInfo: (data) => dispatch(actions.updateUserInfo(data)),
@@ -11,33 +9,123 @@ const mapStateToProps = ({
   reducer: { gameInfo }
 }) => ({ gameInfo });
 
-
-const Infocontainer = ({gameData, gameInfo}) => {
-  console.log('inside info container', gameInfo.Name);
-  //const [draw, setDraw] = useState(true);
-  
+const Infocontainer = ({ gameInfo}) => {
+  console.log(gameInfo);
   const fileNames = () => {
-    if (!gameData.GameFiles) return;
-    return gameData.GameFiles.map((file, i) => {
+    if (!gameInfo.GameFiles) return;
+    return gameInfo.GameFiles.map((file, i) => {
       return (
         <li key={`li${i}`}>
           {file.FileName}
         </li>
       )
-    })
+    });
   }
 
-  useEffect(() => {
-    //setDraw(!draw);
-    console.log('new game');
-  },[gameInfo.Name])
+  const gameDetectionHints = () => {
+    if (!gameInfo.GameDetectionHints) return;
+    return gameInfo.GameDetectionHints.map((hint, i) => {
+      return (
+        <React.Fragment key={`gh${i}`}>
+          <tr>
+            <th>
+              Path
+            </th>
+            <td>
+              {hint.HintPath}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Key
+            </th>
+            <td>
+              {hint.HintKey}
+            </td>
+          </tr>
+        </React.Fragment>
+      );
+    });
+  }
+
+  const fileParsingRules = () => {
+    if (!gameInfo.FileParsingRules) return;
+    return gameInfo.FileParsingRules.map((rules, i) => {
+      return (
+        <React.Fragment key={`fp${i}`}>
+          <tr>
+            <th>
+              Comment strip pattern
+            </th>
+            <td>{rules.CommentStripPattern}</td>
+          </tr>
+          <tr>
+            <th>
+              File extension
+            </th>
+            <td>{rules.FileExtension}</td>
+          </tr>
+          <tr>
+            <th>
+              Inclusion pattern
+            </th>
+            <td>
+              {rules.InclusionPattern}  
+            </td>
+          </tr>
+        </React.Fragment>
+      );
+    });
+  }
+
+  const categorySections = () => {
+    if (!gameInfo.CategorySections) return;
+    return gameInfo.CategorySections.map((category, i) => {
+      return (
+        <React.Fragment key={`fp${i}`}>
+          <tr>
+            <th>
+              Extra include pattern
+            </th>
+            <td>
+              {category.ExtraIncludePattern}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Initial inclusion pattern
+            </th>
+            <td>
+              {category.InitialInclusionPattern}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Name
+            </th>
+            <td>
+              {category.Name}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Path
+            </th>
+            <td>
+              {category.Path}
+            </td>
+          </tr>
+        </React.Fragment>
+      );
+    });
+  }
 
   return (
     <div className={'info-container'} id={'info'}>
       <div className={'info-title-wrapper'}>
         <h1 className={'info-title'}>{gameInfo.Name}</h1>
         <div className={'info-img-wrapper'}>
-          <img className={'info-img'} src={'/' + gameData.ID + '.png'}></img>
+          <img className={'info-img'} src={'/' + gameInfo.ID + '.png'}></img>
         </div>
       </div>
       <div className={'info-table'}>
@@ -48,7 +136,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                 Slug
               </th>
               <td>
-              {gameData.Slug}
+              {gameInfo.Slug}
               </td>
             </tr>
             <tr>
@@ -68,38 +156,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
               <td>
                 <table>
                   <tbody>
-                    <tr>
-                      <th>
-                        Hint path
-                      </th>
-                      <td>
-                        {'%PROGRAMFILES(x86)%\\World of Warcraft'}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Hint key
-                      </th>
-                      <td>
-                        InstallPath
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Hint path
-                      </th>
-                      <td>
-                        {'%PROGRAMFILES(x86)%\\World of Warcraft'}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Hint key
-                      </th>
-                      <td>
-                        InstallPath
-                      </td>
-                    </tr>
+                    {gameDetectionHints()}
                   </tbody>
                 </table>
             
@@ -112,26 +169,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
               <td>
                 <table>
                   <tbody>
-                    <tr>
-                      <th>
-                        Comment strip pattern
-                      </th>
-                      <td>{"(?s)<!--.*?-->"}</td>
-                    </tr>
-                    <tr>
-                      <th>
-                        File extension
-                      </th>
-                      <td>{".xml"}</td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Inclusion pattern
-                      </th>
-                      <td>
-                        {"(?i)<(?:Include|Script)\\s+file=[\"\"']((?:(?<!\\.\\.).)+)[\"\"']\\s*/>"}  
-                      </td>
-                    </tr>
+                    {fileParsingRules()}
                   </tbody>
                 </table>       
               </td>
@@ -143,38 +181,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
               <td>
                 <table>
                   <tbody>
-                    <tr>
-                      <th>
-                        Game ID
-                      </th>
-                      <td>
-                        1
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Name
-                      </th>
-                      <td>
-                        Addons
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Package type
-                      </th>
-                      <td>
-                        1
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Path
-                      </th>
-                      <td>
-                        {"interface\\addons"}
-                      </td>
-                    </tr>
+                    {categorySections()}
                   </tbody>
                 </table>
               </td>
@@ -191,7 +198,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Max free storage
                       </th>
                       <td>
-                        {gameData.MaxFreeStorage}
+                        {gameInfo.MaxFreeStorage}
                       </td>
                     </tr>
                     <tr>
@@ -199,7 +206,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Max premium storage
                       </th>
                       <td>
-                        {gameData.MaxPremiumStorage}
+                        {gameInfo.MaxPremiumStorage}
                       </td>
                     </tr>
                     <tr>
@@ -207,7 +214,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Max file size
                       </th>
                       <td>
-                        {gameData.MaxFileSize}
+                        {gameInfo.MaxFileSize}
                       </td>
                     </tr>
                     <tr>
@@ -216,8 +223,8 @@ const Infocontainer = ({gameData, gameInfo}) => {
                       </th>
                       <td>
                        {
-                          gameData.AddOnSettingsFolderFilter 
-                            ? gameData.AddOnSettingsFolderFilter
+                          gameInfo.AddOnSettingsFolderFilter 
+                            ? gameInfo.AddOnSettingsFolderFilter
                             : 'N/A'
                         }
                       </td>
@@ -228,8 +235,8 @@ const Infocontainer = ({gameData, gameInfo}) => {
                       </th>
                       <td>
                         {
-                          gameData.AddOnSettingsStartingFolder 
-                            ? gameData.AddOnSettingsStartingFolder
+                          gameInfo.AddOnSettingsStartingFolder 
+                            ? gameInfo.AddOnSettingsStartingFolder
                             : 'N/A'
                         }
                       </td>
@@ -240,8 +247,8 @@ const Infocontainer = ({gameData, gameInfo}) => {
                       </th>
                       <td>
                         {
-                          gameData.AddOnSettingsFileFilter 
-                            ? gameData.AddOnSettingsFileFilter
+                          gameInfo.AddOnSettingsFileFilter 
+                            ? gameInfo.AddOnSettingsFileFilter
                             : 'N/A'
                         }
                       </td>
@@ -252,8 +259,8 @@ const Infocontainer = ({gameData, gameInfo}) => {
                       </th>
                       <td>
                         {
-                          gameData.AddOnSettingsFileRemovalFilter 
-                            ? gameData.AddOnSettingsFileRemovalFilter
+                          gameInfo.AddOnSettingsFileRemovalFilter 
+                            ? gameInfo.AddOnSettingsFileRemovalFilter
                             : 'N/A'
                         }
 
@@ -264,7 +271,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Supports addons
                       </th>
                       <td>
-                        {gameData.SupportsAddons ? 'true' : 'false'}
+                        {gameInfo.SupportsAddons ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -272,7 +279,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Supports voice
                       </th>
                       <td>
-                        {gameData.SupportsVoice ? 'true' : 'false'}
+                        {gameInfo.SupportsVoice ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -280,7 +287,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Order
                       </th>
                       <td>
-                        {gameData.Order}
+                        {gameInfo.Order}
                       </td>
                     </tr>
                     <tr>
@@ -288,7 +295,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Supports notifcations
                       </th>
                       <td>
-                        {gameData.SupportsNotifications ? 'true' : 'false'}
+                        {gameInfo.SupportsNotifications ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -296,7 +303,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Bundle assets
                       </th>
                       <td>
-                        {gameData.BundleAssets ? 'true' : 'false'}
+                        {gameInfo.BundleAssets ? 'true' : 'false'}
                       </td>
                     </tr>
                     <tr>
@@ -304,7 +311,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Profiler addon id
                       </th>
                       <td>
-                        {gameData.ProfilerAddOnId}
+                        {gameInfo.ProfilerAddOnId}
                       </td>
                     </tr>
                     <tr>
@@ -312,7 +319,7 @@ const Infocontainer = ({gameData, gameInfo}) => {
                         Twitch game id
                       </th>
                       <td>
-                        {gameData.TwitchGameId}
+                        {gameInfo.TwitchGameId}
                       </td>
                     </tr>
                   </tbody>

@@ -1,0 +1,9 @@
+CategorySections: Array(1)
+    0:
+    ExtraIncludePattern: "(?i)^[^/\\]+[/\\]Bindings\.xml$"
+    GameID: 1
+    ID: 1
+    InitialInclusionPattern: "(?i)^([^/]+)[\\/]\1\.toc$"
+    Name: "Addons"
+    PackageType: 1
+    Path: "interface\addons"
