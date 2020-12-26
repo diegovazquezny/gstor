@@ -10,7 +10,7 @@ const mapStateToProps = ({
 }) => ({ gameInfo });
 
 const Infocontainer = ({ gameInfo}) => {
-  console.log(gameInfo);
+  //console.log(gameInfo);
   const fileNames = () => {
     if (!gameInfo.GameFiles) return;
     return gameInfo.GameFiles.map((file, i) => {

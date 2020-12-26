@@ -29,3 +29,13 @@ export const updateGameInfo = (info) => ({
   type: types.UPDATE_GAME_INFO,
   payload: info
 });
+
+export const updateSearchResults = (results) => ({
+  type: types.SEARCH_RESULTS,
+  payload: results
+});
+
+export const updateSearchQuery = (query) => ({
+  type: types.UPDATE_SEARCH_QUERY,
+  payload: query
+});

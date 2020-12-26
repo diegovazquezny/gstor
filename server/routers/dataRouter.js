@@ -16,6 +16,11 @@ router
   dataController.sendGameData,
   (req, res) => {
     res.status(200).json({gameData: res.locals.gameData});
+  })
+  .get('/search',
+  dataController.search,
+  (req, res) => {
+    res.status(200).json({results: res.locals.results});
   });
 
 module.exports = router;

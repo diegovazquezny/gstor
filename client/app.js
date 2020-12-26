@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Search from './components/search';
 import CardContainer from './containers/cardcontainer';
-import Infocontainer from './containers/infocontainer';
+import SearchContainer from './containers/searchcontainer';
 import Loading from './components/loading';
 import { connect } from 'react-redux';
 //import * as actions from '../src/actions/actions';
@@ -23,8 +23,8 @@ function App({ loaded }) {
       <h1 className={'gstor'}>GStor</h1>
       <h2 className={'gstor-subtitle'}>Find information on your favorite video games</h2>
       <Search/>
+      <SearchContainer/>
       <CardContainer/>
-      {/* <Infocontainer/> */}
     </>
   );
 }

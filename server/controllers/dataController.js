@@ -46,5 +46,31 @@ module.exports = {
     }
     res.locals.gameData = gameData;
     next();
+  },
+  search: (req, res, next) => {
+    const { q } = req.query; 
+    const results = [];
+    const data = getConfig('games.json');
+    const gamesArray = data.data;
+    gamesArray.forEach(game => {
+      game.Name.split(' ').forEach(word => {
+        if (word.toLowerCase() === q.toLowerCase()) {
+          return results.push(game);
+        }
+        if (q.toLowerCase() === word.substr(0, q.length).toLowerCase()) {
+          return results.push(game);
+        } 
+      });
+    });
+    const games = results.map(game => {
+      return {
+        name: game.Name,
+        picUrl: '/' + game.ID + '.png',
+        addons: game.SupportsAddons,
+        voice: game.SupportsVoice
+      }
+    });
+    res.locals.results = games;
+    next();
   }
 }

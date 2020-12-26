@@ -12,6 +12,10 @@ li {
   list-style-type: none;  
 }
 
+a {
+  text-decoration: none;
+}
+
 .card-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -93,6 +97,7 @@ li {
   box-shadow: 3px 3px #888888;
   border-radius: 4px;
   background-color: rgb(39 34 34);
+  width: 969px;
 }
 
 .info-table td, .info-table th {
@@ -167,4 +172,9 @@ td, th, tr {
   100% {
     width: 700px;
   }
+}
+
+.search-info {
+  color: white;
+  margin-left: 15px;
 }

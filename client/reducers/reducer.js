@@ -5,14 +5,18 @@ export const types = {
   LAST_PAGE: 'LAST_PAGE',
   TOTAL_PAGES: 'TOTAL_PAGES',
   GET_DATA: 'GET_DATA',
-  UPDATE_GAME_INFO: 'UPDATE_GAME_INFO'
+  UPDATE_GAME_INFO: 'UPDATE_GAME_INFO',
+  SEARCH_RESULTS: 'SEARCH_RESULTS',
+  UPDATE_SEARCH_QUERY: 'UPDATE_SEARCH_QUERY'
 }
 
 const initialState = {
   page: 1,
   total: 0,
   loaded: false,
-  gameInfo: {} 
+  gameInfo: {},
+  searchResults: [],
+  searchQuery: '' 
 }
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +59,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         gameInfo: action.payload 
+      }
+    case types.SEARCH_RESULTS:
+      return {
+        ...state,
+        searchResults: action.payload 
+      }
+    case types.UPDATE_SEARCH_QUERY:
+      console.log('search query', action.payload);
+      return {
+        ...state,
+        searchQuery: action.payload 
       }
     default:
       return state;
