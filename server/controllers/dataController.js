@@ -1,24 +1,27 @@
-// const fs = require("fs");
+const fs = require("fs");
 
-// function readJsonFileSync(filepath, encoding){
-//   if (typeof (encoding) == 'undefined'){
-//       encoding = 'utf8';
-//     }
-//   const file = fs.readFileSync(filepath, encoding);
-//   return JSON.parse(file);
-// }
+const readJsonFileSync = (filepath, encoding) => {
+  if (typeof (encoding) === 'undefined') encoding = 'utf8';
+  const file = fs.readFileSync(filepath, encoding);
+  return JSON.parse(file);
+}
 
-// function getConfig(file){
-//   const filepath = __dirname + '/../../' + file;
-//   return readJsonFileSync(filepath);
-// }
-
-// json = getConfig('games.json');
+const getConfig = (file) => readJsonFileSync( __dirname + '/../../' + file);
 
 module.exports = {
   sendData: (req, res, next) => {
-    //res.locals.data = getConfig('games.json');
-    res.locals.data = 'data';
+    const page = parseInt(req.query.page);
+    const data = getConfig('games.json');
+    const games = data.data.slice((18 * page) - 18, 18 * page).map(game => {
+      return {
+        name: game.Name,
+        picUrl: '/' + game.ID + '.png',
+        addons: game.SupportsAddons,
+        voice: game.SupportsVoice
+      }
+    });
+    res.locals.data = games;
+    res.locals.total = data.data.length;
     next();
   }
 }

@@ -1,26 +1,45 @@
 export const types = {
-  UPDATE_USER_INFO: 'UPDATE_USER_INFO',
-  UPDATE_TECHNOLOGIES: 'UPDATE_TECHNOLOGIES',
-  DELETE_NOTE: 'DELETE_NOTE',
-  ALL_CATEGORIES: 'ALL_CATEGORIES',
-  MAKE_NEW_NOTE: 'MAKE_NEW_NOTE'
+  FIRST_PAGE: 'FIRST_PAGE',
+  PREV_PAGE: 'PREV_PAGE',
+  NEXT_PAGE: 'NEXT_PAGE',
+  LAST_PAGE: 'LAST_PAGE',
+  TOTAL_PAGES: 'TOTAL_PAGES'
 }
 
-const initialState = {}
+const initialState = {
+  page: 1,
+  total: 0 
+}
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case types.UPDATE_USER_INFO:
-      const { userData } = action.payload;  
+    case types.FIRST_PAGE:
       return {
         ...state,
-        firstName: userData.firstname,
-        lastName: userData.lastname,
-        userName: userData.username,
-        userId: userData.userId,
-        email: userData.email,
-        picture: userData.picture,
-        authenticated: true
+        page: 1
+      };
+    case types.PREV_PAGE:
+      if (state.page === 1) return state;
+      return {
+        ...state,
+        page: state.page - 1
+      };
+    case types.NEXT_PAGE:
+      if (state.page === 15) return state;
+      return {
+        ...state,
+        page: state.page + 1
+      };
+    case types.LAST_PAGE:
+      return {
+        ...state,
+        page: state.total
+      };
+    case types.TOTAL_PAGES:
+      const total = action.payload;
+      return {
+        ...state,
+        total: Math.ceil(total / 18)
       };
     default:
       return state;

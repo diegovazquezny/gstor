@@ -4,12 +4,23 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.card-container {
+body {
+  background-color: #252525;
+}
+
+.card-wrapper {
   display: flex;
   flex-wrap: wrap;
   width: 976px;
   height: 100%;
-  background-color: blue;
+  margin: 0 auto 0 auto;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  width: 976px;
+  height: 100%;
   margin: 0 auto 0 auto;
 }
 
@@ -36,11 +47,13 @@
 .gstor {
   font-size: 6rem;
   text-align: center;
+  color: white;
 }
 
 .gstor-subtitle {
   font-size: 2rem;
   text-align: center;
+  color: white;
 }
 
 .info-title-wrapper {
@@ -76,4 +89,53 @@ td, th, tr {
 
 .info-table-heading {
   font-size: 1.3rem;
+}
+
+.nav-container {
+  display: flex;
+  height: 35px;
+  width: 400px;
+  justify-content: space-between;
+  align-self: flex-end;
+  margin-right: 8px;
+}
+
+.nav-item-first, .nav-item-prev, .nav-item-next, .nav-item-last {
+  display: flex;
+  width: 62px;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-pages {
+  display: flex;
+  width: 120px;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  width: 976px;
+  height: 300px;
+  margin: 0 auto 0 auto;
+  background-color: chartreuse;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-bar {
+  width: 500px;
+  height: 50px;
+  background-color: red;
+  transition: width 2s;
 }

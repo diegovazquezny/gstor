@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
 require('dotenv').config();
 const dataRouter = require('./routers/dataRouter');
 
@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use(express.static(path.join(__dirname, "../client/images/images")));
 
-app.use("/api", dataRouter);
+app.use('/api', dataRouter);
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, '../dist', 'index.html')));
 
 // Global Error Handler

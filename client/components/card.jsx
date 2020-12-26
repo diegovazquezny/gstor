@@ -14,7 +14,7 @@ const mapStateToProps = ({
 const styles = {
   root: { 
     width: '150px',
-    height: '150px',
+    height: '180px',
     border: '1px solid gray',
     boxShadow: '3px 3px #888888',
     borderRadius: '4px',
@@ -25,8 +25,11 @@ const styles = {
     margin: '5px'
   },
   titles: {
-    justifySelf: 'center',
+    display: 'table-cell',
     textAlign: 'center',
+    height: '66px',
+    margin: 'auto',
+    verticalAlign: 'middle'
   },
   supports: {
     padding: '0 10px 0 10px',
@@ -41,12 +44,14 @@ const styles = {
   },
 }
 
-const Card = (props) => {
+const Card = ({name, picUrl, addons, voice}) => {
   return (
     <div style={styles.root}>
-      <h3 style={styles.titles}>Starcraft 2</h3>
+      <div style={{display:'table'}}>
+        <p style={styles.titles}>{name}</p>
+      </div>
       <div style={styles.pic}>
-        <img src={img}></img>
+        <img src={picUrl}></img>
       </div>
       <table>
         <tbody>
@@ -55,7 +60,7 @@ const Card = (props) => {
               <p style={styles.supports}>Supports addons</p>
             </th>
             <th>
-              <p style={styles.supports}>x</p>
+              <p style={styles.supports}>{addons ? 'Y' : 'N'}</p>
             </th>
           </tr>
           <tr>
@@ -63,7 +68,7 @@ const Card = (props) => {
               <p style={styles.supports}>Supports voice</p>
             </th>
             <th>
-              <p style={styles.supports}>x</p>
+              <p style={styles.supports}>{voice ? 'Y' : 'N'}</p>
             </th>
           </tr>
         </tbody>
