@@ -42,7 +42,8 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
             name={game.name} 
             picUrl={game.picUrl}
             addons={game.addons}
-            voice={game.voice} 
+            voice={game.voice}
+            num={i} 
           />
         </a> 
       )

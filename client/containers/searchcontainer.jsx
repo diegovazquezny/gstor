@@ -41,7 +41,8 @@ const SearchContainer = ({
             name={game.name} 
             picUrl={game.picUrl}
             addons={game.addons}
-            voice={game.voice} 
+            voice={game.voice}
+            num={i+10000} 
           />
         </a> 
       )
