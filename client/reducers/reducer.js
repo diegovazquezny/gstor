@@ -55,7 +55,6 @@ const reducer = (state = initialState, action) => {
         loaded: true 
       }
     case types.UPDATE_GAME_INFO:
-      //console.log('game info', action.payload);
       return {
         ...state,
         gameInfo: action.payload 
@@ -66,7 +65,6 @@ const reducer = (state = initialState, action) => {
         searchResults: action.payload 
       }
     case types.UPDATE_SEARCH_QUERY:
-      console.log('search query', action.payload);
       return {
         ...state,
         searchQuery: action.payload 

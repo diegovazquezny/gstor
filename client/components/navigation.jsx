@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
@@ -13,9 +13,7 @@ const mapStateToProps = ({
   reducer: { page, total }
 }) => ({ page, total });
 
-// TODO: total is hardcoded. needs to come from reducer
-
-const Navigation = ({firstPage, prevPage, nextPage, lastPage, page}) => {
+const Navigation = ({firstPage, prevPage, nextPage, lastPage, page, total}) => {
   return (
     <div className={'nav-container'}>
       <div className={'nav-item-first'} onClick={firstPage}>
@@ -25,7 +23,7 @@ const Navigation = ({firstPage, prevPage, nextPage, lastPage, page}) => {
         {'< Prev'}    
       </div>
       <div className={'nav-pages'}>
-        {`Page ${page} of ${'15'}`}    
+        {`Page ${page} of ${total}`}    
       </div>
       <div className={'nav-item-next'} onClick={nextPage}>
         {'Next >'}    

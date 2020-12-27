@@ -1,15 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import img from '../images/images/65.png'
-//import * as actions from '../../actions/actions';
-
-const mapDispatchToProps = dispatch => ({
- // updateUserInfo: (data) => dispatch(actions.updateUserInfo(data)),
-});
-
-const mapStateToProps = ({
-  reducer: { userName, picture, authenticated }
-}) => ({ userName, picture, authenticated });
 
 const styles = {
   root: { 
@@ -78,4 +67,4 @@ const Card = ({name, picUrl, addons, voice, selectGame}) => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default Card;

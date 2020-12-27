@@ -7,16 +7,16 @@ const readJsonFileSync = (filepath, encoding) => {
 }
 
 const getConfig = (file) => readJsonFileSync( __dirname + '/../../' + file);
+const data = getConfig('games.json');
+const gamesArray = data.data;
 
 module.exports = {
   sendData: (req, res, next) => {
     const page = parseInt(req.query.page);
-    const data = getConfig('games.json');
-    const gamesArray = data.data;
     gamesArray.sort((a,b) => {
       return a.Order - b.Order || a.Name.localeCompare(b.Name);
     });
-    const currentGamesArray = data.data.slice((18 * page) - 18, 18 * page);
+    const currentGamesArray = gamesArray.slice((18 * page) - 18, 18 * page);
     const games = currentGamesArray.map(game => {
       return {
         name: game.Name,
@@ -25,18 +25,13 @@ module.exports = {
         voice: game.SupportsVoice
       }
     });
-    const initialGameInfo = currentGamesArray[0];
     res.locals.data = games;
-    res.locals.total = data.data.length;
-    res.locals.initialGameInfo = initialGameInfo;
+    res.locals.total = gamesArray.length;
+    res.locals.initialGameInfo = currentGamesArray[0];
     next();
   },
   sendGameData: (req, res, next) => {
-    console.log('send game data');
     const { name } = req.query;
-    //const name = '9Dragons';
-    const data = getConfig('games.json');
-    const gamesArray = data.data;
     let gameData = {};
     for (let i in gamesArray) {
       if (gamesArray[i].Name === name) {
@@ -50,8 +45,6 @@ module.exports = {
   search: (req, res, next) => {
     const { q } = req.query; 
     const results = [];
-    const data = getConfig('games.json');
-    const gamesArray = data.data;
     gamesArray.forEach(game => {
       game.Name.split(' ').forEach(word => {
         if (word.toLowerCase() === q.toLowerCase()) {

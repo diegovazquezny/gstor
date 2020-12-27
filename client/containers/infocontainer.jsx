@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-
-const mapDispatchToProps = dispatch => ({
- // updateUserInfo: (data) => dispatch(actions.updateUserInfo(data)),
-});
 
 const mapStateToProps = ({
   reducer: { gameInfo }
 }) => ({ gameInfo });
 
-const Infocontainer = ({ gameInfo}) => {
-  //console.log(gameInfo);
+const Infocontainer = ({ gameInfo }) => {
   const fileNames = () => {
     if (!gameInfo.GameFiles) return;
     return gameInfo.GameFiles.map((file, i) => {
@@ -333,4 +328,4 @@ const Infocontainer = ({ gameInfo}) => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Infocontainer);
+export default connect(mapStateToProps, null)(Infocontainer);

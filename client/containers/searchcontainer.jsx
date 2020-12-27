@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import Navigation from '../components/navigation';
 import Card from '../components/card';
-import Loading from '../components/loading'; 
 import * as actions from '../actions/actions';
-import Infocontainer from './infocontainer';
 
 const mapDispatchToProps = dispatch => ({
-  totalPages: (totalGames) => dispatch(actions.totalPages(totalGames)),
-  getData: () => dispatch(actions.getData()),
   updateGameInfo: (info) => dispatch(actions.updateGameInfo(info)),
  });
 
@@ -30,14 +25,12 @@ const SearchContainer = ({
       .then(res => res.json())
       .then(data => {
         updateGameInfo(data.gameData);
-        setShowGameInfo(true);
         return data;
       })
       .catch(err => console.log(err));
   }
 
   const makeCards = (data) => {
-    //console.log(data.results);
     if (!data.results) return;
     return data.results.map((game, i) => {
       return (
@@ -71,8 +64,9 @@ const SearchContainer = ({
             <div className={'card-wrapper'}>
               {showSearchResults && makeCards(searchResults)}  
             </div>
-            {/* <div id={'info'}></div>
-            {showGameInfo && <Infocontainer gameData={gameInfo}/>} */}
+            <br/>
+            <br/>
+            <br/>
           </>
       }
     </div>

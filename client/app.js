@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Search from './components/search';
 import CardContainer from './containers/cardcontainer';
 import SearchContainer from './containers/searchcontainer';
-import Loading from './components/loading';
 import { connect } from 'react-redux';
-//import * as actions from '../src/actions/actions';
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
 
-// const mapStateToProps = ({
-//   reducer: { page, total }
-// }) => ({ page, total });
-
-
-function App({ loaded }) {
+function App() {
   return (
     <>
       <h1 className={'gstor'}>GStor</h1>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
@@ -7,19 +7,18 @@ const mapDispatchToProps = dispatch => ({
  updateSearchQuery: (query) => dispatch(actions.updateSearchQuery(query))
 });
 
-const mapStateToProps = ({
-  reducer: { userName, picture, authenticated }
-}) => ({ userName, picture, authenticated });
-
 const Search = ({ updateSearchResults, updateSearchQuery }) => {
-
+  const [showError, setShowError] = useState(false);
+  const [showLengthError, setShowLengthError] = useState(false);
   const handleSearch = e => {
     if (e.key === 'Enter') {
-      console.log(e.target.value);
+      if (!e.target.value) return setShowError(true);
+      if (e.target.value.length === 1) return setShowLengthError(true);
+      setShowError(false);
+      setShowLengthError(false);
       fetch('/api/search?q=' + e.target.value)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           updateSearchResults(data);
           updateSearchQuery(e.target.value);
         })
@@ -36,8 +35,10 @@ const Search = ({ updateSearchResults, updateSearchQuery }) => {
           onKeyDown={handleSearch}
           placeholder={'Search for a game'}
         />
+        {showError && <p className={'search-error'}>Search cannot be blank</p>}
+        {showLengthError && <p className={'search-error'}>Search must be longer than one character</p>}
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);

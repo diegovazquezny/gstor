@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
  });
 
 const mapStateToProps = ({
-  reducer: { page, total, gameInfo }
-}) => ({ page, total, gameInfo });
+  reducer: { page, gameInfo }
+}) => ({ page, gameInfo });
 
 
 const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) => {
@@ -26,7 +26,6 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
     fetch('/api/game?name=' + name)
       .then(res => res.json())
       .then(data => {
-        //console.log('select game =>', data.gameData);
         updateGameInfo(data.gameData);
         setShowGameInfo(true);
         return data;
@@ -59,7 +58,6 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
         getData();
         updateGameInfo(data.initialGameInfo);
         setShowGameInfo(true);
-        //setGameData(data.initialGameInfo);
         return data;
       })
       .then(data => setTimeout(() => setFetchedGames(true), 500))
