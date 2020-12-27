@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
 const mapDispatchToProps = dispatch => ({
  updateSearchResults: (results) => dispatch(actions.updateSearchResults(results)),
- updateSearchQuery: (query) => dispatch(actions.updateSearchQuery(query))
+ updateSearchQuery: (query) => dispatch(actions.updateSearchQuery(query)),
+ updateHideSearch: (bool) => dispatch(actions.updateHideSearch(bool))
 });
 
-const Search = ({ updateSearchResults, updateSearchQuery }) => {
+const Search = ({ updateSearchResults, updateSearchQuery, updateHideSearch }) => {
+  const searchRef = useRef();
   const [showError, setShowError] = useState(false);
   const [showLengthError, setShowLengthError] = useState(false);
   const handleSearch = e => {
@@ -16,11 +18,13 @@ const Search = ({ updateSearchResults, updateSearchQuery }) => {
       if (e.target.value.length === 1) return setShowLengthError(true);
       setShowError(false);
       setShowLengthError(false);
+      updateHideSearch(false);
       fetch('/api/search?q=' + e.target.value)
-        .then(res => res.json())
-        .then(data => {
-          updateSearchResults(data);
-          updateSearchQuery(e.target.value);
+      .then(res => res.json())
+      .then(data => {
+        updateSearchResults(data);
+        updateSearchQuery(e.target.value);
+        searchRef.current.value = '';
         })
         .catch(err => console.log(err));
     }
@@ -28,7 +32,8 @@ const Search = ({ updateSearchResults, updateSearchQuery }) => {
 
   return (
     <div className={'search-wrapper'}>
-        <input 
+        <input
+          ref={searchRef} 
           type="text" 
           id="search" 
           name="search" 

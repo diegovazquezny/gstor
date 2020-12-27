@@ -7,7 +7,8 @@ export const types = {
   GET_DATA: 'GET_DATA',
   UPDATE_GAME_INFO: 'UPDATE_GAME_INFO',
   SEARCH_RESULTS: 'SEARCH_RESULTS',
-  UPDATE_SEARCH_QUERY: 'UPDATE_SEARCH_QUERY'
+  UPDATE_SEARCH_QUERY: 'UPDATE_SEARCH_QUERY',
+  HIDE_SEARCH: 'HIDE_SEARCH'
 }
 
 const initialState = {
@@ -16,7 +17,8 @@ const initialState = {
   loaded: false,
   gameInfo: {},
   searchResults: [],
-  searchQuery: '' 
+  searchQuery: '',
+  hideSearch: true 
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,24 +26,28 @@ const reducer = (state = initialState, action) => {
     case types.FIRST_PAGE:
       return {
         ...state,
-        page: 1
+        page: 1,
+        hideSearch: true
       };
     case types.PREV_PAGE:
       if (state.page === 1) return state;
       return {
         ...state,
-        page: state.page - 1
+        page: state.page - 1,
+        hideSearch: true
       };
     case types.NEXT_PAGE:
       if (state.page === 15) return state;
       return {
         ...state,
-        page: state.page + 1
+        page: state.page + 1,
+        hideSearch: true
       };
     case types.LAST_PAGE:
       return {
         ...state,
-        page: state.total
+        page: state.total,
+        hideSearch: true
       };
     case types.TOTAL_PAGES:
       const total = action.payload;
@@ -68,6 +74,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchQuery: action.payload 
+      }
+    case types.HIDE_SEARCH:
+      return {
+        ...state,
+        hideSearch: action.payload 
       }
     default:
       return state;

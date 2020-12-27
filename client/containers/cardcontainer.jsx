@@ -76,7 +76,7 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
           <>
             <Navigation/>
             <div className={'card-wrapper'}>
-              {fetchedGames && cardsArray}  
+              {cardsArray}  
             </div>
             <div id={'info'}></div>
             {showGameInfo && <Infocontainer gameData={gameInfo}/>}

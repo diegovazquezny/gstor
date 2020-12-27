@@ -8,14 +8,15 @@ const mapDispatchToProps = dispatch => ({
  });
 
 const mapStateToProps = ({
-  reducer: { searchResults, searchQuery }
-}) => ({ searchResults, searchQuery });
+  reducer: { searchResults, searchQuery, hideSearch }
+}) => ({ searchResults, searchQuery, hideSearch });
 
 
 const SearchContainer = ({ 
     searchResults, 
     updateGameInfo, 
-    searchQuery, 
+    searchQuery,
+    hideSearch 
   }) => {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [totalResults, setTotalResults] = useState(0);
@@ -53,6 +54,10 @@ const SearchContainer = ({
     setTotalResults(searchResults.results.length);
   },[JSON.stringify(searchResults.results)]);
 
+  useEffect(()=>{
+    if (hideSearch) setShowSearchResults(false);
+  },[hideSearch]);
+
   return (
     <div className={'card-container'}>
       {
@@ -62,7 +67,7 @@ const SearchContainer = ({
               {`Showing ${totalResults} results for "${searchQuery}"`}
             </h3>
             <div className={'card-wrapper'}>
-              {showSearchResults && makeCards(searchResults)}  
+              {makeCards(searchResults)}
             </div>
             <br/>
             <br/>

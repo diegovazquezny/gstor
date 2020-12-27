@@ -39,3 +39,8 @@ export const updateSearchQuery = (query) => ({
   type: types.UPDATE_SEARCH_QUERY,
   payload: query
 });
+
+export const updateHideSearch = (bool) => ({
+  type: types.HIDE_SEARCH,
+  payload: bool
+});
