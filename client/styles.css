@@ -37,6 +37,7 @@ a {
   height: 35px;
   border-radius: 25px;
   padding-left: 10px;
+  border: 1px solid #252525;
 }
 
 #search:focus {
