@@ -58,6 +58,7 @@ a {
   font-size: 6rem;
   text-align: center;
   color: white;
+  margin: auto;
 }
 
 .gstor-subtitle {
@@ -223,4 +224,46 @@ td, th, tr {
   height: 64px;
   width: 64px;
   margin: 5px auto 5px auto; 
+}
+
+@media only screen and (max-width: 1000px) {
+  body {
+    display: flex;
+  }
+  #app {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+  }
+  .card-container {
+    width: 486px;
+    align-items: center;
+  }
+  .card-wrapper {
+    width: 486px;
+  }
+  .nav-container {
+    width: 400px;
+    align-self: center;
+  }
+
+  .info-title-wrapper {
+    width: 486px;
+  }
+
+  .info-title {
+    font-size: 2rem;
+  }
+
+  .info-table {
+    width: 486px;
+  }
+
+  .info-container {
+    width: 486px;
+  }
+
+  #search {
+    width: 300px;
+  }
 }

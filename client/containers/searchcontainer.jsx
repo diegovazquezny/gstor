@@ -60,7 +60,7 @@ const SearchContainer = ({
   },[hideSearch]);
 
   return (
-    <div className={'card-container'}>
+    <>
       {
         showSearchResults &&
           <>
@@ -75,7 +75,7 @@ const SearchContainer = ({
             <br/>
           </>
       }
-    </div>
+    </>
   );
 }
 

@@ -8,7 +8,7 @@ const mapDispatchToProps = dispatch => ({
  updateHideSearch: (bool) => dispatch(actions.updateHideSearch(bool))
 });
 
-const Search = ({ updateSearchResults, updateSearchQuery, updateHideSearch }) => {
+export const Search = ({ updateSearchResults, updateSearchQuery, updateHideSearch }) => {
   const searchRef = useRef();
   const [showError, setShowError] = useState(false);
   const [showLengthError, setShowLengthError] = useState(false);
@@ -20,12 +20,12 @@ const Search = ({ updateSearchResults, updateSearchQuery, updateHideSearch }) =>
       setShowLengthError(false);
       updateHideSearch(false);
       fetch('/api/search?q=' + e.target.value)
-      .then(res => res.json())
-      .then(data => {
-        updateSearchResults(data);
-        updateSearchQuery(e.target.value);
-        searchRef.current.value = '';
-        })
+        .then(res => res.json())
+        .then(data => {
+          updateSearchResults(data);
+          updateSearchQuery(e.target.value);
+          searchRef.current.value = '';
+          })
         .catch(err => console.log(err));
     }
   }

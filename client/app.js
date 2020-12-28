@@ -2,7 +2,6 @@ import React from "react";
 import Search from './components/search';
 import CardContainer from './containers/cardcontainer';
 import SearchContainer from './containers/searchcontainer';
-import { connect } from 'react-redux';
 
 function App() {
   return (
@@ -16,4 +15,4 @@ function App() {
   );
 }
 
-export default connect(null, null)(App);
+export default App;

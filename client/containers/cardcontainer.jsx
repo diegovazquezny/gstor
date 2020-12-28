@@ -50,7 +50,7 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
     });
   }
 
-  if (!fetchedGames) {
+  useEffect(() => {
     fetch('/api/data?page=' + page)
       .then(res => res.json())
       .then(data => {
@@ -61,13 +61,10 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
         setShowGameInfo(true);
         return data;
       })
-      .then(data => setTimeout(() => setFetchedGames(true), 500))
+      .then(() => setTimeout(() => setFetchedGames(true), 500))
       .catch(err => console.log(err));
-  }
-
-  useEffect(() => {
     setFetchedGames(false);
-  },[page]);
+  }, [page]);
 
   return (
     <div className={'card-container'}>
@@ -79,7 +76,6 @@ const CardContainer = ({ page, totalPages, getData, updateGameInfo, gameInfo }) 
             <div className={'card-wrapper'}>
               {cardsArray}  
             </div>
-            <div id={'info'}></div>
             {showGameInfo && <Infocontainer gameData={gameInfo}/>}
           </>
       }
