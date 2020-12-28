@@ -11,7 +11,7 @@ export const types = {
   HIDE_SEARCH: 'HIDE_SEARCH'
 }
 
-const initialState = {
+export const initialState = {
   page: 1,
   total: 0,
   loaded: false,
@@ -21,7 +21,7 @@ const initialState = {
   hideSearch: true 
 }
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch(action.type) {
     case types.FIRST_PAGE:
       return {
@@ -85,4 +85,4 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-export default reducer;
+// export default reducer;
